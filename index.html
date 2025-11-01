@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxo & Tranquilidade</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #d4af37, #f4e5c2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f4e5c2);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            background-size: cover;
+            background-position: top;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+            background-image: url("Capa Jeny.png");
+        }
+
+            .hero::after {
+                content: '';
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+                border-radius: 50%;
+                bottom: -200px;
+                left: -200px;
+                animation: float 8s ease-in-out infinite reverse;
+                z-index: 1; /* Adicione isso */
+            }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2; /* O texto fica por cima de tudo */
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #d4af37, #f4e5c2, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #ffffff;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #d4af37, #f4e5c2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #d4af37, #f4e5c2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 80px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #faf8f3 100%);
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #d4af37;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        #sobre {
+            background: linear-gradient(135deg, #faf8f3 0%, #ffffff 100%);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #f4e5c2;
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FC Essence Beauty Clinic</div>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+            <div class="hero-content" style="z-index: 1;">
+            <h1>Luxo & Tranquilidade</h1>
+            <p>Onde a excelência encontra a serenidade</p>
+            <a href="#servicos" class="cta-button">Descobrir Mais</a>
+        </div>
+    </section>
+
+    <section id="servicos">
+        <h2 class="section-title">Nossos Serviços</h2>
+        <p class="section-subtitle">Experiências exclusivas pensadas para você</p>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Exclusividade</h3>
+                <p>Atendimento personalizado e experiências únicas criadas especialmente para atender seus desejos mais refinados.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌟</div>
+                <h3>Sofisticação</h3>
+                <p>Cada detalhe cuidadosamente pensado para proporcionar uma experiência de luxo incomparável.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🕊️</div>
+                <h3>Tranquilidade</h3>
+                <p>Um ambiente sereno e harmonioso onde você pode relaxar e aproveitar momentos de pura paz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2 class="section-title">Sobre Nós</h2>
+        <p class="section-subtitle">Comprometidos com a excelência</p>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Qualidade Premium</h3>
+                <p>Utilizamos apenas os melhores recursos e profissionais para garantir uma experiência impecável.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Atenção aos Detalhes</h3>
+                <p>Cada aspecto é meticulosamente planejado para superar suas expectativas mais elevadas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌸</div>
+                <h3>Bem-estar Total</h3>
+                <p>Seu conforto e satisfação são nossa prioridade absoluta em cada interação.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova Social - Adicione esta seção antes do footer -->
+    <section id="depoimentos" style="position: relative; padding: 120px 40px; background: linear-gradient(135deg, #ffffff 0%, #faf8f3 100%); overflow: hidden;">
+        <h2 class="section-title">O Que Dizem Nossos Clientes</h2>
+        <p class="section-subtitle">Experiências que transformam vidas</p>
+
+        <!-- Container dos comentários flutuantes -->
+        <div style="max-width: 1200px; margin: 80px auto; position: relative; min-height: 450px;">
+
+            <!-- Comentário 1 - Canto Superior Esquerdo -->
+            <div class="floating-testimonial" style="position: absolute; left: 0; top: 16%; animation: floatTestimonial1 6s ease-in-out infinite;">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Uma experiência absolutamente incrível! O atendimento personalizado e a atenção aos detalhes superaram todas as minhas expectativas. Luxo e tranquilidade em perfeita harmonia."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img class="author-avatar" src="https://i.pravatar.cc/80?img=1" alt="Maria Silva">
+                        <div class="author-info">
+                            <h4 class="author-name">Maria Silva</h4>
+                            <p class="author-role">Empresária</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentário 2 - Meio Direita -->
+            <div class="floating-testimonial" style="position: absolute; right: 0; top: 50%; transform: translateX(-50%); animation: floatTestimonial2 7s ease-in-out infinite;">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Simplesmente perfeito! Cada momento foi pensado para proporcionar máximo conforto e sofisticação. Uma experiência que vou guardar para sempre."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img class="author-avatar" src="https://i.pravatar.cc/80?img=12" alt="João Santos">
+                        <div class="author-info">
+                            <h4 class="author-name">João Santos</h4>
+                            <p class="author-role">Médico</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentário 3 - Meio Inferior (Centro) -->
+            <div class="floating-testimonial" style="position: absolute; left: 34%; transform: translateX(-50%); bottom: 0; animation: floatTestimonial3 8s ease-in-out infinite;">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Excelência em cada detalhe! O ambiente transmite uma paz indescritível. Recomendo para todos que buscam qualidade premium e momentos únicos."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img class="author-avatar" src="https://i.pravatar.cc/80?img=5" alt="Ana Costa">
+                        <div class="author-info">
+                            <h4 class="author-name">Ana Costa</h4>
+                            <p class="author-role">Arquiteta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        .floating-testimonial {
+            width: 350px;
+            z-index: 10;
+        }
+
+        .testimonial-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+            .testimonial-card::before {
+                content: '"';
+                position: absolute;
+                top: -20px;
+                left: 20px;
+                font-size: 80px;
+                color: #d4af37;
+                opacity: 0.2;
+                font-family: Georgia, serif;
+                line-height: 1;
+            }
+
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
+            }
+
+        .testimonial-content {
+            margin-bottom: 25px;
+        }
+
+        .stars {
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #f4e5c2;
+            object-fit: cover;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 3px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes floatTestimonial1 {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatTestimonial2 {
+            0%, 100% {
+                transform: translateY(-50%) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-50%) translateX(-10px);
+            }
+        }
+
+        @keyframes floatTestimonial3 {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .floating-testimonial {
+                position: relative !important;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                transform: none !important;
+                margin: 30px auto;
+                animation: none !important;
+            }
+
+            #depoimentos > div {
+                min-height: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-testimonial {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+
+    <style>
+        .floating-testimonial {
+            width: 350px;
+            z-index: 10;
+        }
+
+        .testimonial-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+            .testimonial-card::before {
+                content: '"';
+                position: absolute;
+                top: -20px;
+                left: 20px;
+                font-size: 80px;
+                color: #d4af37;
+                opacity: 0.2;
+                font-family: Georgia, serif;
+                line-height: 1;
+            }
+
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
+            }
+
+        .testimonial-content {
+            margin-bottom: 25px;
+        }
+
+        .stars {
+            color: #d4af37;
+            font-size: 18px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #f4e5c2;
+            object-fit: cover;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 3px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes floatTestimonial1 {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatTestimonial2 {
+            0%, 100% {
+                transform: translateY(-50%) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-50%) translateX(-10px);
+            }
+        }
+
+        @keyframes floatTestimonial3 {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .floating-testimonial {
+                position: relative !important;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                transform: none !important;
+                margin: 30px auto;
+                animation: none !important;
+            }
+
+            #depoimentos > div {
+                min-height: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-testimonial {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+
+    <section id="contato">
+        <h2 class="section-title">Entre em Contato</h2>
+        <p class="section-subtitle">Estamos prontos para atendê-lo</p>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#home" class="cta-button">Fale Conosco</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Élite. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
